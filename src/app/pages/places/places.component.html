@@ -1,0 +1,197 @@
+<app-loader *ngIf="loading"></app-loader>
+<app-menu></app-menu>
+<div class="container">
+    <h5 class="title">Bem vindo, {{ auth.getUser().first_name }} {{ auth.getUser().last_name }}</h5>
+    <!-- <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bd-example-modal-lg">Cadastrar Local</button> -->
+    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModalCenter" (click)="openFormAdd()">Cadastrar Local</button>
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h6 class="border-bottom border-gray pb-2 mb-0">Locais Cadastrados</h6>
+        <div class="media text-muted pt-3 line-place" *ngFor="let item of places; let key = index">
+            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <strong class="d-block text-gray-dark">{{ item.name }}</strong>
+                {{ item.address }}
+                {{ item.street_number ? ', ' + item.street_number : '' }}
+                {{ item.state ? ' - ' + item.state : '' }}
+                {{ item.uf ? '(' + item.uf + ')' : '' }}
+                {{ item.complement ? '- ' + item.complement : '' }}
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter" (click)="openFormEdit(key, item)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">{{ labelBtn }} Local</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form [formGroup]="RegisterForm" class="card mb-4" (ngSubmit)="onSubmitPlace()" novalidate>
+                <input type="hidden" name="id" id="id" class="form-control" formControlName="id">
+
+                <div class="modal-body">
+
+                    <!-- FORM BEGIN -->    
+                    <fieldset class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <label for="name" class="control-label font-weight-bold">Nome do local *</label>
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Informe o nome do Local" required
+                                    formControlName="name"
+                                    [ngClass]="{ 'is-invalid': ( RegisterForm.get('name').dirty && RegisterForm.get('name').hasError('required') ) || ( RegisterForm.get('name').dirty && RegisterForm.get('name').hasError('maxlength') ) }"
+                                >
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('name').dirty && RegisterForm.get('name').hasError('required')">Obrigatório</div>
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('name').dirty && RegisterForm.get('name').hasError('maxlength')">
+                                    Máximo: {{ RegisterForm.get('name').errors.maxlength?.requiredLength }},
+                                    atual: {{ RegisterForm.get('name').errors.maxlength?.actualLength }}
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="postal_code" class="control-label font-weight-bold">CEP *</label>
+                                <input type="text" name="postal_code" id="postal_code" mask="99999-999" class="form-control celular" placeholder="Informe o CEP" required
+                                    formControlName="postal_code"
+                                    [ngClass]="{ 'is-invalid': ( RegisterForm.get('postal_code').dirty && RegisterForm.get('postal_code').hasError('required') ) || ( RegisterForm.get('postal_code').dirty && RegisterForm.get('postal_code').hasError('maxlength') ) }"
+                                    (blur)="searchCEP();"
+                                >
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('postal_code').dirty && RegisterForm.get('postal_code').hasError('required')">Obrigatório</div>
+                                <div class="invalid-feedback" *ngIf="cepIsInvalid">CEP inválido</div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="address" class="control-label font-weight-bold">Endereço *</label>
+                                <input type="text" name="address" id="address" class="form-control" placeholder="Informe o endereço" required
+                                    formControlName="address"
+                                    [ngClass]="{ 'is-invalid': ( RegisterForm.get('address').dirty && RegisterForm.get('address').hasError('required') ) || ( RegisterForm.get('address').dirty && RegisterForm.get('address').hasError('maxlength') ) }"
+                                >
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('address').dirty && RegisterForm.get('address').hasError('required')">Obrigatório</div>
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('address').dirty && RegisterForm.get('address').hasError('maxlength')">
+                                    Máximo: {{ RegisterForm.get('address').errors.maxlength?.requiredLength }},
+                                    atual: {{ RegisterForm.get('address').errors.maxlength?.actualLength }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="street_number" class="control-label font-weight-bold">Número *</label>
+                                <input type="text" name="street_number" id="street_number" class="form-control" placeholder="Número" required
+                                    formControlName="street_number"
+                                    [ngClass]="{ 'is-invalid': ( RegisterForm.get('street_number').dirty && RegisterForm.get('street_number').hasError('required') ) || ( RegisterForm.get('street_number').dirty && RegisterForm.get('street_number').hasError('maxlength') ) }"
+                                    (blur)="getLocation();"
+                                >
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('street_number').dirty && RegisterForm.get('street_number').hasError('required')">Obrigatório</div>
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('street_number').dirty && RegisterForm.get('street_number').hasError('maxlength')">
+                                    Máximo: {{ RegisterForm.get('street_number').errors.maxlength?.requiredLength }},
+                                    atual: {{ RegisterForm.get('street_number').errors.maxlength?.actualLength }}
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="complement" class="control-label font-weight-bold">Complemento</label>
+                                <input type="text" name="complement" id="complement" class="form-control" placeholder="Informe o complemento" formControlName="complement">
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('complement').dirty && RegisterForm.get('complement').hasError('maxlength')">
+                                    Máximo: {{ RegisterForm.get('complement').errors.maxlength?.requiredLength }},
+                                    atual: {{ RegisterForm.get('complement').errors.maxlength?.actualLength }}
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="neighborhood" class="control-label font-weight-bold">Bairro *</label>
+                                <input type="text" name="neighborhood" id="neighborhood" class="form-control" placeholder="Informe o bairro" required
+                                    formControlName="neighborhood"
+                                    [ngClass]="{ 'is-invalid': ( RegisterForm.get('neighborhood').dirty && RegisterForm.get('neighborhood').hasError('required') ) || ( RegisterForm.get('neighborhood').dirty && RegisterForm.get('neighborhood').hasError('maxlength') ) }"
+                                >
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('neighborhood').dirty && RegisterForm.get('neighborhood').hasError('required')">Obrigatório</div>
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('neighborhood').dirty && RegisterForm.get('neighborhood').hasError('maxlength')">
+                                    Máximo: {{ RegisterForm.get('neighborhood').errors.maxlength?.requiredLength }},
+                                    atual: {{ RegisterForm.get('neighborhood').errors.maxlength?.actualLength }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label for="city" class="control-label font-weight-bold">Cidade *</label>
+                                <input type="text" name="city" id="city" class="form-control" placeholder="Informe a Cidade" required
+                                    formControlName="city"
+                                    [ngClass]="{ 'is-invalid': ( RegisterForm.get('city').dirty && RegisterForm.get('city').hasError('required') ) || ( RegisterForm.get('city').dirty && RegisterForm.get('city').hasError('maxlength') ) }"
+                                >
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('city').dirty && RegisterForm.get('city').hasError('required')">Obrigatório</div>
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('city').dirty && RegisterForm.get('city').hasError('maxlength')">
+                                    Máximo: {{ RegisterForm.get('city').errors.maxlength?.requiredLength }},
+                                    atual: {{ RegisterForm.get('city').errors.maxlength?.actualLength }}
+                                </div>
+                            </div>
+                            <div class="form-group col-md-5">
+                                <label for="state" class="control-label font-weight-bold">Estado *</label>
+                                <select class="form-control"
+                                    [ngClass]="{ 'input-error': RegisterForm.get('state').dirty && RegisterForm.get('state').hasError('required') }"
+                                    name="state" id="state" formControlName="state"
+                                    (change)="fillSelect('state')"
+                                >
+                                    <option value="" disabled selected></option>
+                                    <option *ngFor="let s of states" [value]="s.state" >{{s.state}}</option>
+                                </select>
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('state').dirty && RegisterForm.get('state').hasError('required')">Obrigatório</div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="uf" class="control-label font-weight-bold">UF *</label>
+                                <select class="form-control"
+                                    [ngClass]="{ 'input-error': RegisterForm.get('uf').dirty && RegisterForm.get('uf').hasError('required') }"
+                                    name="uf" id="uf" formControlName="uf"
+                                    (change)="fillSelect('uf')"
+                                >
+                                    <option value="" disabled selected></option>
+                                    <option *ngFor="let s of states" [value]="s.code" >{{s.code}}</option>
+                                </select>
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('uf').dirty && RegisterForm.get('uf').hasError('required')">Obrigatório</div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="state" class="control-label font-weight-bold">País *</label>
+                                <select class="form-control"
+                                    [ngClass]="{ 'input-error': RegisterForm.get('country').dirty && RegisterForm.get('country').hasError('required') }"
+                                    name="country" id="country" formControlName="country"
+                                    (change)="fillSelect('country')"
+                                >
+                                    <option value="" disabled selected></option>
+                                    <option *ngFor="let c of countries" [value]="c.nome" >{{c.nome}}</option>
+                                </select>
+                                <div class="alert-error" *ngIf="RegisterForm.get('country').dirty && RegisterForm.get('country').hasError('required')">Obrigatório</div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="state" class="control-label font-weight-bold">Código</label>
+                                <select class="form-control"
+                                    [ngClass]="{ 'input-error': RegisterForm.get('country_code').dirty && RegisterForm.get('country_code').hasError('required') }"
+                                    name="country_code" id="country_code" formControlName="country_code"
+                                    (change)="fillSelect('country_code')"
+                                >
+                                    <option value="" disabled selected></option>
+                                    <option *ngFor="let c of countries" [value]="c.iso" >{{c.iso}}</option>
+                                </select>
+                                <div class="alert-error" *ngIf="RegisterForm.get('country_code').dirty && RegisterForm.get('country_code').hasError('required')">Obrigatório</div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="lat" class="control-label font-weight-bold">Latitude</label>
+                                <input type="text" name="lat" id="lat" class="form-control celular" placeholder="Latitude" formControlName="lat" readonly>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="lat" class="control-label font-weight-bold">Longitude</label>
+                                <input type="text" name="lng" id="lng" class="form-control celular" placeholder="Longitude" formControlName="lng" readonly>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <!-- FORM END -->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" [disabled]="submitted || RegisterForm.invalid">{{ labelBtn }} <img src="assets/images/loading.gif" alt="" *ngIf="submitted"></button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

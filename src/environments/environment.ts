@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api_url: 'http://api-final.linhadiretapm.com/api',
+  GOOGLE_KEY: "AIzaSyC2s_mnFI_Wdv-nJz09sOWgfdVdnXQedI8"
 };
 
 /*
