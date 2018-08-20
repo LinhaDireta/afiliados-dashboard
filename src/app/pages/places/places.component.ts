@@ -89,6 +89,10 @@ export class PlacesComponent implements OnInit {
     Validators.required
   ]);
 
+  ssid = new FormControl('', [
+    Validators.maxLength(100)
+  ]);
+
   remember_me = new FormControl('', []);
 
   RegisterForm: FormGroup = this.builder.group({
@@ -105,7 +109,8 @@ export class PlacesComponent implements OnInit {
     country_code: this.country_code,
     uf: this.uf,
     lat: this.lat,
-    lng: this.lng
+    lng: this.lng,
+    ssid: this.ssid
   });
   
   constructor(
@@ -209,12 +214,13 @@ export class PlacesComponent implements OnInit {
     this.submitted = true;
 
     if ( this.RegisterForm.valid ) {
-      const data = this.RegisterForm.value;
+      let data = this.RegisterForm.value;
       if (data.id) {
         console.log('EDIT');
         console.log(data);
       } else {
         delete data.id;
+        data.public = true;
         this.placesService.add(this.auth.getUser().id, data).subscribe((result) => {
           if (result['success']) {
             this.places.push(result['place']);
@@ -258,6 +264,7 @@ export class PlacesComponent implements OnInit {
     this.RegisterForm.controls['country_code'].setValue(place.country_code);
     this.RegisterForm.controls['lat'].setValue(place.location.coordinates[1]);
     this.RegisterForm.controls['lng'].setValue(place.location.coordinates[0]);
+    this.RegisterForm.controls['ssid'].setValue(place.ssid);
   }
 
 }

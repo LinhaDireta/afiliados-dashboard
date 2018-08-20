@@ -10,7 +10,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getPlaces(userId) {
-    return this.http.get<any>(environment.api_url + '/user/' + userId + '/place');
+    return this.http.get<any>(environment.api_url + '/user/' + userId + '/place/public');
   }
 
 }

@@ -183,6 +183,19 @@
                                 <input type="text" name="lng" id="lng" class="form-control celular" placeholder="Longitude" formControlName="lng" readonly>
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="ssid" class="control-label font-weight-bold">Rede</label>
+                                <input type="text" name="ssid" id="ssid" class="form-control" placeholder="Informe a Rede"
+                                    formControlName="ssid"
+                                    [ngClass]="{ 'is-invalid': ( RegisterForm.get('ssid').dirty && RegisterForm.get('ssid').hasError('maxlength') ) }"
+                                >
+                                <div class="invalid-feedback" *ngIf="RegisterForm.get('ssid').dirty && RegisterForm.get('ssid').hasError('maxlength')">
+                                    Máximo: {{ RegisterForm.get('ssid').errors.maxlength?.requiredLength }},
+                                    atual: {{ RegisterForm.get('ssid').errors.maxlength?.actualLength }}
+                                </div>
+                            </div>
+                        </div>
                     </fieldset>
                     <!-- FORM END -->
 
