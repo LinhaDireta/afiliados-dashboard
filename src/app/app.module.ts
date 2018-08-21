@@ -15,6 +15,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth.guards';
 import { SearchService } from './services/search.service';
 import { PlacesService } from './services/places.service';
+import { AlertifyService } from './services/alertify.service';
 
 import { AppComponent } from './app.component';
 import { PlacesComponent } from './pages/places/places.component';
@@ -47,6 +48,7 @@ import { MenuComponent } from './components/menu/menu.component';
     AuthGuard,
     SearchService,
     PlacesService,
+    AlertifyService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: RefreshTokenInterceptor, multi: true },
     { provide: ErrorHandler, useClass: AplicationErrorHandle },

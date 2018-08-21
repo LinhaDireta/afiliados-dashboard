@@ -7,6 +7,7 @@ import { SearchService } from '../../services/search.service';
 import { PlacesService } from '../../services/places.service';
 import { dataCountries } from '../../_data/countries';
 import { dataStates } from '../../_data/states';
+import { AlertifyService } from '../../services/alertify.service';
 
 declare var $: any;
 
@@ -118,7 +119,8 @@ export class PlacesComponent implements OnInit {
     private auth: AuthService, 
     private user: UserService,
     private search: SearchService,
-    private placesService: PlacesService) {
+    private placesService: PlacesService,
+    private alertify: AlertifyService) {
   }
 
   ngOnInit() {
@@ -130,6 +132,7 @@ export class PlacesComponent implements OnInit {
   getPlaces() {
     this.user.getPlaces(this.auth.getUser().id).subscribe((places) => {
       this.places = places;
+      console.log(places);
       this.loading = false;
     });
   }
@@ -214,10 +217,36 @@ export class PlacesComponent implements OnInit {
     this.submitted = true;
 
     if ( this.RegisterForm.valid ) {
+      
       let data = this.RegisterForm.value;
+
       if (data.id) {
-        console.log('EDIT');
-        console.log(data);
+        this.placesService.update(data).subscribe((result) => {
+          if (result['success']) {
+            data.location = {
+              coordinates: [
+                data.lng,
+                data.lat
+              ],
+              type: 'Point'
+            };
+    
+            delete data.lng;
+            delete data.lat;
+            
+            this.places.map((elem, index) => {
+              if (elem.id == data.id) {
+                this.places[index] = data;
+              }
+            });
+            this.clearForm();
+            $("#exampleModalCenter").modal('hide');
+            this.alertify.success('Local alterado com sucesso');
+          } else {
+            this.alertify.error('Erro ao editar o local');
+            this.submitted = false;
+          }
+        });
       } else {
         delete data.id;
         data.public = true;
@@ -226,6 +255,10 @@ export class PlacesComponent implements OnInit {
             this.places.push(result['place']);
             this.clearForm();
             $("#exampleModalCenter").modal('hide');
+            this.alertify.success('Local cadastrado com sucesso')
+          } else {
+            this.alertify.error('Erro ao cadastrar o local');
+            this.submitted = false;
           }
         });
       }
@@ -265,6 +298,22 @@ export class PlacesComponent implements OnInit {
     this.RegisterForm.controls['lat'].setValue(place.location.coordinates[1]);
     this.RegisterForm.controls['lng'].setValue(place.location.coordinates[0]);
     this.RegisterForm.controls['ssid'].setValue(place.ssid);
+  }
+
+  removePlace(index, item) {
+    const msg = `Deseja excluir o local <b>${item.name}</b>?`;
+    this.alertify.confirm('Atenção', msg,
+      () => {
+        this.placesService.remove(item.id).subscribe((response) => {
+          if (response['success']) {
+            this.places.splice(index, 1);
+            this.alertify.success('Local excluído com sucesso');
+          }
+        });
+      },
+      () => {}
+    );
+
   }
 
 }
