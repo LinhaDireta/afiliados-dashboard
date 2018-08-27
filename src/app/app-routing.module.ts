@@ -6,7 +6,7 @@ import { PlacesComponent } from './pages/places/places.component';
 import { AuthGuard } from './services/auth.guards';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: PlacesComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'places', component: PlacesComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard]},
 ];

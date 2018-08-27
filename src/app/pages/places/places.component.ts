@@ -116,7 +116,7 @@ export class PlacesComponent implements OnInit {
   
   constructor(
     private builder: FormBuilder,
-    private auth: AuthService, 
+    public auth: AuthService, 
     private user: UserService,
     private search: SearchService,
     private placesService: PlacesService,
@@ -250,6 +250,7 @@ export class PlacesComponent implements OnInit {
       } else {
         delete data.id;
         data.public = true;
+        data.types = [];
         this.placesService.add(this.auth.getUser().id, data).subscribe((result) => {
           if (result['success']) {
             this.places.push(result['place']);

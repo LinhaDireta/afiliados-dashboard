@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // api_url: 'http://api-final.linhadiretapm.com/api',
-  api_url: 'http://api.linhadireta.dev.br/api',
+  api_url: 'http://api-final.linhadiretapm.com/api',
+  // api_url: 'http://api.linhadireta.dev.br/api',
   GOOGLE_KEY: "AIzaSyC2s_mnFI_Wdv-nJz09sOWgfdVdnXQedI8"
 };
 
