@@ -6,22 +6,8 @@
         <button type="button" class="btn btn-add pull-right" data-toggle="modal" data-target="#exampleModalCenter" (click)="openFormAdd()"><i class="fa fa-plus" aria-hidden="true"></i> ADICIONAR</button>
     </div>
 
-    <app-list-place></app-list-place>
+    <app-list-place *ngFor="let place of places; let key = index" [place]="place" (editAction)="onEdit($event)" (deleteAction)="onDelete($event)"></app-list-place>
 
-    <div class="my-3 p-3 bg-white rounded shadow-sm">
-        <div class="media text-muted pt-3 line-place" *ngFor="let item of places; let key = index">
-            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                <strong class="d-block text-gray-dark">{{ item.name }}</strong>
-                {{ item.address }}
-                {{ item.street_number ? ', ' + item.street_number : '' }}
-                {{ item.state ? ' - ' + item.state : '' }}
-                {{ item.uf ? '(' + item.uf + ')' : '' }}
-                {{ item.complement ? '- ' + item.complement : '' }}
-                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModalCenter" (click)="openFormEdit(key, item)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                <button type="button" class="btn btn-danger" (click)="removePlace(key, item)"><i class="fa fa-trash" aria-hidden="true"></i></button>
-            </p>
-        </div>
-    </div>
 </div>
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

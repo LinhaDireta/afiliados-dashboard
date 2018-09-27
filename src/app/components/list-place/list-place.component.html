@@ -4,13 +4,13 @@
       <i class="fa fa-map-marker" aria-hidden="true"></i>
     </div>
     <div class="text verticaly-center">
-      <h3>Minha Faculdade</h3>
-      <p>Av. das Américas, n120938, Barra da Tijuca - Rio de Janeiro - RJ, 28907-410</p>
+      <h3>{{place.name}}</h3>
+      <p>{{place.full_address}}</p>
     </div>
   </div>
   <div class="col-3 box-count">
     <p class="verticaly-center">Ocorrências Recentes</p>
-    <h3 class="verticaly-center">12</h3>
+    <h3 class="verticaly-center">{{place.alerts_count}}</h3>
     <div class="circle verticaly-center"></div>
   </div>
   <div class="col-3 box-check">
@@ -23,8 +23,8 @@
     </div>
   </div>
   <div class="col-2 box-btns">
-    <button class="btn verticaly-center"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-    <button class="btn verticaly-center"><i class="fa fa-times" aria-hidden="true"></i></button>
+    <button class="btn verticaly-center" (click)="onEditAction()"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+    <button class="btn verticaly-center" (click)="onDeleteAction()"><i class="fa fa-times" aria-hidden="true"></i></button>
     <button class="btn verticaly-center"><i class="fa fa-eye" aria-hidden="true"></i></button>
   </div>
 </div>
