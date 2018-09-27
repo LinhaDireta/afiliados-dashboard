@@ -1,7 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <!--
   <a class="py-2" href="/places">
     <img src="assets/images/icone.svg" alt="">
   </a>
+  -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,20 +11,41 @@
   <div class="collapse navbar-collapse" id="navbarsExample05">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/places"><i class="fa fa-home" aria-hidden="true"></i> Página Inicial <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/places">PONTOS <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> Meus Locais</a>
+        <a class="nav-link" href="#">CONTATOS</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-users" aria-hidden="true"></i> Contatos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-info-circle" aria-hidden="true"></i> Dados Cadastrais</a>
+        <a class="nav-link" href="#">CHAMADOS</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" (click)="logout($event)"><i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a>
       </li>
     </ul>
   </div>
+
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <div class="user-info">
+          <div class="box-texts">
+            <p>{{ auth.getUser().first_name }} {{ auth.getUser().last_name }}</p>
+            <p>Conta Pessoal</p>
+          </div>
+          <a class="nav-link" href="#" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <div class="box-image">
+              <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
+          </a>
+        </div>
+        <div class="dropdown-menu dropdown-menu-right m-0" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Sua conta</a>
+          <a class="dropdown-item" href="#">Upgrade</a>
+          <a class="dropdown-item" href="#">Suporte</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
 </nav>

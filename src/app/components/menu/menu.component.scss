@@ -1,3 +1,65 @@
 .bg-dark {
-    background-color: #0469be !important;
+    background-color: #255ea1 !important;
 }
+
+.navbar-collapse {
+    .navbar-nav {
+        width: 100%;
+        height: 40px;
+        position: relative;
+        .nav-item {
+            display: contents;
+            .user-info {
+                position: absolute;
+                right: 0px;
+                top: 0px;
+                .box-texts {
+                    float: left;
+                    text-align: right;
+                    color: #fff;
+                    margin-right: 10px;
+                    p {
+                        font-size: 12px;
+                        margin: 0;
+                        padding-top: 2px;
+                    }
+                }
+                .nav-link {
+                    padding: 4px;
+                    float: left;
+                    .box-image {
+                        background-color: #fff;
+                        border-radius: 50%;
+                        font-size: 20px;
+                        text-align: center;
+                        width: 35px;
+                        height: 35px;
+                        color: #255ea1;
+                        padding: 3px;
+                    }
+                }
+            }
+            .dropdown-menu {
+                border: 1px solid #255ea1ab;
+                padding: 10px 10px 30px 10px;
+                text-align: right;
+                a {
+                    border-bottom: 1px solid #255ea1;
+                    font-size: 12px;
+                    color: #255ea1;
+                    padding: 10px 5px;
+                }
+            }
+        }
+    }
+}
+
+.navbar-nav li:hover .dropdown-menu {
+    display: block;
+}
+
+/* rotate caret on hover */
+.dropdown-menu > li > a:hover:after {
+    text-decoration: underline;
+    transform: rotate(-90deg);
+} 
