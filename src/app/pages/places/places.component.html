@@ -1,11 +1,14 @@
 <app-loader *ngIf="loading"></app-loader>
 <app-menu></app-menu>
 <div class="container">
-    <h5 class="title">Bem vindo, {{ auth.getUser().first_name }} {{ auth.getUser().last_name }}</h5>
-    <!-- <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".bd-example-modal-lg">Cadastrar Local</button> -->
-    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModalCenter" (click)="openFormAdd()">Cadastrar Local</button>
+    <div class="box-top">
+        <h1 class="title"><i class="fa fa-university" aria-hidden="true"></i> Seus Pontos</h1>
+        <button type="button" class="btn btn-add pull-right" data-toggle="modal" data-target="#exampleModalCenter" (click)="openFormAdd()"><i class="fa fa-plus" aria-hidden="true"></i> ADICIONAR</button>
+    </div>
+
+    <app-list-place></app-list-place>
+
     <div class="my-3 p-3 bg-white rounded shadow-sm">
-        <h6 class="border-bottom border-gray pb-2 mb-0">Locais Cadastrados</h6>
         <div class="media text-muted pt-3 line-place" *ngFor="let item of places; let key = index">
             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                 <strong class="d-block text-gray-dark">{{ item.name }}</strong>
