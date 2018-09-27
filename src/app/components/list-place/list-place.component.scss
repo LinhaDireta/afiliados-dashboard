@@ -1,0 +1,130 @@
+.list-container {
+    background-color: #f8f8f8;
+    margin: 0 0 10px 0;
+    border-radius: 6px;
+    color: #255fa2;
+    min-height: 100px;
+    /* BOX INFO */
+    .box-info {
+        .icon {
+            float: left;
+            font-size: 38px;
+            width: 40px;
+        }
+        .text {
+            float: left;
+            width: calc(100% - 45px);
+            h3 {
+                text-transform: uppercase;
+                font-size: 16px;
+                font-weight: 600;
+            }
+            p {
+                font-size: 12px;
+                font-weight: 300;
+                margin: 0;
+            }
+        }
+    }
+    /* BOX COUNT */
+    .box-count {
+        .circle {
+            width: 25px;
+            height: 25px;
+            background-color: #dedede;
+            border-radius: 50%;
+            float: left;
+        }
+        h3 {
+            font-size: 50px;
+            font-weight: 300;
+            width: 65px;
+            text-align: center;
+            margin: 0;
+            float: left;
+        }
+        p {
+            width: calc(100% - 125px);
+            float: left;
+            text-transform: uppercase;
+            text-align: right;
+            font-size: 12px;
+            font-weight: 300;
+            margin: 0;
+        }
+    }
+    /* BOX CHECK */
+    .box-check {
+        position: relative;
+        .row-one {
+            width: 100%;
+            position: relative;
+            overflow: auto;
+            p {
+                width: calc(100% - 90px);
+                float: left;
+                text-transform: uppercase;
+                text-align: right;
+                font-size: 12px;
+                font-weight: 300;
+                margin: 0;
+                padding-right: 10px;
+            }
+            app-btn-checkbox-switch {
+                float: left;
+                margin-top: 5px;
+            }
+        }
+
+        .row-two {
+            position: absolute;
+            bottom: 8px;
+            display: block;
+            width: 100%;
+            text-align: right;
+            padding-right: 55px;
+            p {
+                margin: 0;
+                font-size: 10px;
+                font-weight: 300;
+                font-style: italic;
+                span {
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 12px;
+                    color: #fff;
+                    background-color: #255fa2;
+                    padding: 4px 8px;
+                    border-radius: 50%;
+                    margin-left: 6px;
+                }
+            }
+        }
+    }
+    /* BOX BUTTONS */
+    .box-btns {
+        text-align: center;
+        .btn {
+            background-color: #fff;
+            color: #255fa2;
+            width: 40px;
+            height: 40px;
+            margin: 0 4px;
+            border-radius: 50%;
+        }
+    }
+}
+
+.verticaly-center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.with-ocorrence {
+    background-color: #fc280b;
+}
+
+.no-ocorrence {
+    background-color: #74ff84;
+}

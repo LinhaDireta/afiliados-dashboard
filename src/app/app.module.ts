@@ -23,6 +23,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { ListPlaceComponent } from './components/list-place/list-place.component';
+import { BtnCheckboxSwitchComponent } from './components/atoms/btn-checkbox-switch/btn-checkbox-switch.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { MenuComponent } from './components/menu/menu.component';
     LoginComponent,
     HomeComponent,
     LoaderComponent,
-    MenuComponent
+    MenuComponent,
+    ListPlaceComponent,
+    BtnCheckboxSwitchComponent
   ],
   imports: [
     BrowserModule,
