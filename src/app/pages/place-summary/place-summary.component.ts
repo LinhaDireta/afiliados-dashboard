@@ -40,7 +40,6 @@ export class PlaceSummaryComponent implements OnInit {
   listAlerts(period) {
     this.current_period = period;
     this._placeService.listAlerts(this.place.id, period).subscribe( res => {
-      console.log(res);
       this.alerts = res['alerts'];
       this.summary = res['summary'];
     });
@@ -53,8 +52,7 @@ export class PlaceSummaryComponent implements OnInit {
     summary.forEach(element => {
       total += element.count;
     });
-    console.log(total);
     return total;
   }
- 
+
 }

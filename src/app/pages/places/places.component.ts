@@ -135,7 +135,6 @@ export class PlacesComponent implements OnInit {
   getPlaces() {
     this.user.getPlaces(this.auth.getUser().id).subscribe((places) => {
       this.places = places;
-      console.log(places);
       this.loading = false;
     });
   }
@@ -327,7 +326,6 @@ export class PlacesComponent implements OnInit {
   }
 
   onView(place) {
-    console.log(place);
     localStorage.setItem('place-summary', JSON.stringify(place));
     this.router.navigate(['place-summary']);
   }
