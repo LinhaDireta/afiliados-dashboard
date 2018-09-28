@@ -27,6 +27,7 @@ import { ListPlaceComponent } from './components/list-place/list-place.component
 import { BtnCheckboxSwitchComponent } from './components/atoms/btn-checkbox-switch/btn-checkbox-switch.component';
 import { PlaceSummaryComponent } from './pages/place-summary/place-summary.component';
 import { RealTimeComponent } from './pages/real-time/real-time.component';
+import { OptInComponent } from './components/opt-in/opt-in.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { RealTimeComponent } from './pages/real-time/real-time.component';
     ListPlaceComponent,
     BtnCheckboxSwitchComponent,
     PlaceSummaryComponent,
-    RealTimeComponent
+    RealTimeComponent,
+    OptInComponent
   ],
   imports: [
     BrowserModule,

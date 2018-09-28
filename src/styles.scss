@@ -14,3 +14,9 @@
 .btn-rounded {
     border-radius: 50px;
 }
+
+.verticaly-center {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
