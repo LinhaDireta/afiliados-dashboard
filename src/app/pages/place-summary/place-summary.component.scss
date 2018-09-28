@@ -1,0 +1,28 @@
+.container {
+    color: #255ea1;
+
+    .filter-container {
+        background-color: #f8f8f8;
+        .btn-filter {
+            padding: 5px 10px;
+            min-width: 160px;
+        }
+    }
+
+    .table th {
+        border-top: 0;
+    }
+
+    .badge-pill {
+        padding: 10px;
+        min-width: 38px;
+        font-size: 18px;
+    }
+}
+
+
+@media (max-width: 1600px) {
+    .container {
+        max-width: 1250px;
+    }
+}

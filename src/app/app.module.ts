@@ -25,6 +25,8 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ListPlaceComponent } from './components/list-place/list-place.component';
 import { BtnCheckboxSwitchComponent } from './components/atoms/btn-checkbox-switch/btn-checkbox-switch.component';
+import { PlaceSummaryComponent } from './pages/place-summary/place-summary.component';
+import { RealTimeComponent } from './pages/real-time/real-time.component';
 import { OptInComponent } from './components/opt-in/opt-in.component';
 
 @NgModule({
@@ -37,6 +39,8 @@ import { OptInComponent } from './components/opt-in/opt-in.component';
     MenuComponent,
     ListPlaceComponent,
     BtnCheckboxSwitchComponent,
+    PlaceSummaryComponent,
+    RealTimeComponent,
     OptInComponent
   ],
   imports: [
