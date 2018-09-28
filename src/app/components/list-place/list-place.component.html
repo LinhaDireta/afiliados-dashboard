@@ -19,7 +19,14 @@
       <app-btn-checkbox-switch [isChecked]="enableMonitoring" (actionCheck)="onCheck($event)"></app-btn-checkbox-switch>
     </div>
     <div class="row-two">
-      <p>O que é isso? <span>?</span></p>
+      <p>O que é isso? <span (click)="tooltipe = true">?</span></p>
+      <div class="ld-tooltipe" [ngClass]="{'showTooltipe': tooltipe}">
+        <div class="btn-close" (click)="tooltipe = false"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <div class="paleta-cores"></div>
+        <h3>Funcionalidade exclusiva para afiliados</h3>
+        <p class="description">Você também é notificado de ocorrências em proximidades e poderá acompanhar tipos e recorrências de alertas neste ponto.</p>
+        <button>Saiba mais</button>
+      </div>
     </div>
   </div>
   <div class="col-2 box-btns">

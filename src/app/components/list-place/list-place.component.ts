@@ -15,6 +15,8 @@ export class ListPlaceComponent implements OnInit {
   // output event to remove place
   @Output() deleteAction = new EventEmitter<boolean>();
 
+  tooltipe: boolean = false;
+  
   constructor() { }
 
   ngOnInit() {

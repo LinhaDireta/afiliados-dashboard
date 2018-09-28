@@ -97,6 +97,7 @@
                     padding: 4px 8px;
                     border-radius: 50%;
                     margin-left: 6px;
+                    cursor: pointer;
                 }
             }
         }
@@ -121,4 +122,70 @@
 
 .no-ocorrence {
     background-color: #74ff84;
+}
+
+
+/*
+* LD TOOLTIP
+*/
+.ld-tooltipe {
+    width: 500px;
+    background-color: #33b7f8;
+    color: #fff;
+    position: absolute;
+    right: 67px;
+    top: 45px;
+    border-radius: 10px;
+    z-index: 1;
+    visibility: hidden;
+    text-align: center;
+    .btn-close {
+        color: #fff;
+        font-size: 30px;
+        position: absolute;
+        left: 15px;
+        top: 0px;
+        cursor: pointer;
+    }
+    .paleta-cores {
+        width: 0;
+        height: 0;
+        border: 20px solid;
+        border-color: transparent #33b7f8 #33b7f8 transparent;
+        /********************/
+        position: absolute;
+        right: 0;
+        top: -22px;
+    }
+    h3 {
+        margin: 40px 0 20px;
+        padding: 0;
+        text-align: center;
+        font-size: 25px;
+        font-weight: 300;
+    }
+    p {
+        &.description {
+            text-align: center;
+            font-size: 15px !important;
+            font-style: normal !important;
+            padding: 0 24px;
+            font-weight: 200 !important;
+        }
+    }
+    button {
+        padding: 6px 30px;
+        background-color: transparent;
+        border: 5px solid #fff;
+        margin: 20px auto;
+        position: relative;
+        color: #fff;
+        border-radius: 50px;
+        font-size: 16px;
+        font-weight: 100;
+    }
+}
+
+.showTooltipe {
+    visibility: visible;
 }
