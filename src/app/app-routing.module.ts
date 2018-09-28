@@ -4,11 +4,13 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PlacesComponent } from './pages/places/places.component';
 import { AuthGuard } from './services/auth.guards';
+import { OptInComponent } from './components/opt-in/opt-in.component';
 
 const routes: Routes = [
-  {path: '', component: PlacesComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard]},
+  {path: '', component: HomeComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'places', component: PlacesComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard]},
+  {path: 'optin', component: OptInComponent},
 ];
 
 @NgModule({

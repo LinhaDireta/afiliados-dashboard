@@ -25,6 +25,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ListPlaceComponent } from './components/list-place/list-place.component';
 import { BtnCheckboxSwitchComponent } from './components/atoms/btn-checkbox-switch/btn-checkbox-switch.component';
+import { OptInComponent } from './components/opt-in/opt-in.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { BtnCheckboxSwitchComponent } from './components/atoms/btn-checkbox-swit
     LoaderComponent,
     MenuComponent,
     ListPlaceComponent,
-    BtnCheckboxSwitchComponent
+    BtnCheckboxSwitchComponent,
+    OptInComponent
   ],
   imports: [
     BrowserModule,
