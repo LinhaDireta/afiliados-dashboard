@@ -14,6 +14,8 @@ export class ListPlaceComponent implements OnInit {
   @Output() editAction = new EventEmitter<boolean>();
   // output event to remove place
   @Output() deleteAction = new EventEmitter<boolean>();
+  // output event to view place summary
+  @Output() viewAction = new EventEmitter<boolean>();
 
   constructor() { }
 
@@ -32,6 +34,18 @@ export class ListPlaceComponent implements OnInit {
 
   onDeleteAction() {
     this.deleteAction.emit(this.place);
+  }
+
+  onViewAction() {
+    this.viewAction.emit(this.place);
+  }
+
+  formatAddress(place) {
+    if (place.full_address != null && place.full_address !== '') {
+      return place.full_address;
+    } else {
+      return place.address + ', ' + place.street_number + ' - ' + place.neighborhood + ' - ' + place.uf + ' ' + place.postal_code;
+    }
   }
 
 }

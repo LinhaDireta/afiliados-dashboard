@@ -21,4 +21,11 @@ export class PlacesService {
     return this.http.delete(environment.api_url + '/user/remove/' + id + '/place');
   }
 
+  listAlerts(place_id, period = 30) {
+    const params = {
+      'period': period
+    };
+    return this.http.post(environment.api_url + `/user-place/${place_id}`, params);
+  }
+
 }

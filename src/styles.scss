@@ -1,2 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.color-active {
+    color: #33b7f8
+}
+
+.background-active {
+    background-color: #33b7f8;
+    color: #ffffff
+}
+
+.btn-rounded {
+    border-radius: 50px;
+}

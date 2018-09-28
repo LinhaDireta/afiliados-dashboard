@@ -8,6 +8,7 @@ import { PlacesService } from '../../services/places.service';
 import { dataCountries } from '../../_data/countries';
 import { dataStates } from '../../_data/states';
 import { AlertifyService } from '../../services/alertify.service';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -115,12 +116,14 @@ export class PlacesComponent implements OnInit {
   });
   
   constructor(
-    private builder: FormBuilder,
-    public auth: AuthService, 
-    private user: UserService,
-    private search: SearchService,
-    private placesService: PlacesService,
-    private alertify: AlertifyService) {
+      private builder: FormBuilder,
+      public auth: AuthService,
+      private user: UserService,
+      private search: SearchService,
+      private placesService: PlacesService,
+      private alertify: AlertifyService,
+      private router: Router
+    ) {
   }
 
   ngOnInit() {
@@ -321,6 +324,12 @@ export class PlacesComponent implements OnInit {
   onEdit(place) {
     this.openFormEdit(place);
     $('#exampleModalCenter').modal('show');
+  }
+
+  onView(place) {
+    console.log(place);
+    localStorage.setItem('place-summary', JSON.stringify(place));
+    this.router.navigate(['place-summary']);
   }
 
 }
