@@ -236,7 +236,7 @@ export class PlacesComponent implements OnInit {
             
             this.places.map((elem, index) => {
               if (elem.id == data.id) {
-                this.places[index] = data;
+                this.places[index] = Object.assign(this.places[index], data);
               }
             });
             this.clearForm();
@@ -281,7 +281,7 @@ export class PlacesComponent implements OnInit {
     this.clearForm();
   }
 
-  openFormEdit(key, place) {
+  openFormEdit(place) {
     this.labelBtn = 'Editar';
     this.clearForm();
     this.RegisterForm.controls['id'].setValue(place.id);
@@ -299,15 +299,16 @@ export class PlacesComponent implements OnInit {
     this.RegisterForm.controls['lat'].setValue(place.location.coordinates[1]);
     this.RegisterForm.controls['lng'].setValue(place.location.coordinates[0]);
     this.RegisterForm.controls['ssid'].setValue(place.ssid);
+
   }
 
-  removePlace(index, item) {
+  onDelete(item) {
     const msg = `Deseja excluir o local <b>${item.name}</b>?`;
     this.alertify.confirm('Atenção', msg,
       () => {
         this.placesService.remove(item.id).subscribe((response) => {
           if (response['success']) {
-            this.places.splice(index, 1);
+            // this.places.splice(index, 1);
             this.alertify.success('Local excluído com sucesso');
           }
         });
@@ -315,6 +316,11 @@ export class PlacesComponent implements OnInit {
       () => {}
     );
 
+  }
+
+  onEdit(place) {
+    this.openFormEdit(place);
+    $('#exampleModalCenter').modal('show');
   }
 
 }
