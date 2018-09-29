@@ -28,4 +28,8 @@ export class PlacesService {
     return this.http.post(environment.api_url + `/user-place/${place_id}`, params);
   }
 
+  listAlertsByIds(place_ids) {
+    return this.http.get(environment.api_url + `/alert/list?place_ids=${place_ids}`);
+  }
+
 }

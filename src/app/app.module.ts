@@ -28,6 +28,7 @@ import { BtnCheckboxSwitchComponent } from './components/atoms/btn-checkbox-swit
 import { PlaceSummaryComponent } from './pages/place-summary/place-summary.component';
 import { RealTimeComponent } from './pages/real-time/real-time.component';
 import { OptInComponent } from './components/opt-in/opt-in.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { OptInComponent } from './components/opt-in/opt-in.component';
     BtnCheckboxSwitchComponent,
     PlaceSummaryComponent,
     RealTimeComponent,
-    OptInComponent
+    OptInComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

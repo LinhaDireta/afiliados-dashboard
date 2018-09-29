@@ -7,14 +7,17 @@ import { PlaceSummaryComponent } from './pages/place-summary/place-summary.compo
 import { RealTimeComponent } from './pages/real-time/real-time.component';
 import { OptInComponent } from './components/opt-in/opt-in.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard]},
+  // {path: '', component: HomeComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard]},
+  {path: '', component: PlacesComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'places', component: PlacesComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard]},
   {path: 'place-summary', component: PlaceSummaryComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard]},
   {path: 'real-time', component: RealTimeComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard]},
   {path: 'optin', component: OptInComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard]},
 ];
 
 @NgModule({

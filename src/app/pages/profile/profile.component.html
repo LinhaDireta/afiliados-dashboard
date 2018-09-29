@@ -1,0 +1,25 @@
+<app-menu></app-menu>
+<div class="container">
+
+    <div class="box-top">
+        <h1 class="title"><i class="fa fa-user" aria-hidden="true"></i> Minha Conta</h1>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <ul *ngIf="user.plan" style="list-style-type: none;">
+          <li><span style="display: inline-block; width: 95px; font-weight: 600;">Plano: </span> {{user.plan.name}}</li>
+          <li><span style="display: inline-block; width: 95px; font-weight: 600;">Descrição: </span> {{user.plan.description}}</li>
+          <li>
+              <span style="display: inline-block; width: 95px; font-weight: 600;">Benefícios: </span>
+            <ul>
+                <li *ngFor="let b of user.plan.benefits; let key = index">
+                  {{b.name}} <b>{{b.value}}</b>
+                </li>
+            </ul> 
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+</div>

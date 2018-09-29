@@ -13,4 +13,12 @@ export class UserService {
     return this.http.get<any>(environment.api_url + '/user/' + userId + '/place/public');
   }
 
+  getPlan(userId) {
+    return this.http.get<any>(environment.api_url + '/user/' + userId + '/plan');
+  }
+
+  getRelationships(userId, relationships) {
+    return this.http.post<any>(environment.api_url + `/user/${userId}/relationships`, relationships);
+  }
+
 }
