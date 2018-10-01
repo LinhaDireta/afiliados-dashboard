@@ -5,20 +5,23 @@
         <h1 class="title"><i class="fa fa-bell" aria-hidden="true"></i> Monitoramento</h1>
     </div>
 
-  <div class="row">
-      <div class="col-4">
-          <form>
-              <div class="form-group">
-                  <label for="exampleSelect1">Example select</label>
-                  <select class="form-control" id="exampleSelect1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                  </select>
-                </div>
-            </form>
-          </div>
-      </div>
+  <!-- <div class="row">
+    <div class="col-4">
+        <form>
+            <div class="form-group">
+                <label for="exampleSelect1">Example select</label>
+                <select class="form-control" id="exampleSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                </select>
+            </div>
+        </form>
+        </div>
+    </div> -->
+
+    <app-alert-card *ngFor="let alert of alerts;" [alert]="alert"></app-alert-card>
+
   </div>

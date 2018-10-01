@@ -29,6 +29,7 @@ import { PlaceSummaryComponent } from './pages/place-summary/place-summary.compo
 import { RealTimeComponent } from './pages/real-time/real-time.component';
 import { OptInComponent } from './components/opt-in/opt-in.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { AlertCardComponent } from './components/alert-card/alert-card.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     PlaceSummaryComponent,
     RealTimeComponent,
     OptInComponent,
-    ProfileComponent
+    ProfileComponent,
+    AlertCardComponent
   ],
   imports: [
     BrowserModule,

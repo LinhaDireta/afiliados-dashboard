@@ -11,6 +11,9 @@ import { PlacesService } from '../../services/places.service';
 export class RealTimeComponent implements OnInit {
 
   places: any = [];
+  alerts: any = [];
+
+  exec: any = null;
 
   constructor(
     private _userService: UserService,
@@ -35,18 +38,20 @@ export class RealTimeComponent implements OnInit {
 
     let place_ids = '';
     this.places.forEach(element => {
-      console.log(element.id)
       place_ids += ',' + element.id;
     });
 
     // Remove the fist comma
     place_ids = place_ids.substring(1);
 
-    console.log(place_ids);
-
     this._placesService.listAlertsByIds(place_ids).subscribe( res => {
-      console.log(res);
-    })
+      this.alerts = res;
+      this.exec = setTimeout(() => this.getAlerts(), 15000);
+    });
+  }
+
+  public ngOnDestroy() {
+    clearTimeout(this.exec);
   }
 
 }
