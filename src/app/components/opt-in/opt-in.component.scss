@@ -211,3 +211,19 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
+#modal-thankyou {
+    img {
+        width: 80px;
+    }
+    h5 {
+        font-size: 17px;
+        max-width: 430px;
+        margin: auto;
+    }
+
+    .btn {
+        padding: 18px;
+        width: 300px;
+    }
+}

@@ -21,4 +21,8 @@ export class UserService {
     return this.http.post<any>(environment.api_url + `/user/${userId}/relationships`, relationships);
   }
 
+  getVouchers() {
+    return this.http.get('./assets/vouchers.json');
+  }
+
 }

@@ -20,7 +20,7 @@
 
     <div class="row item">
       <div class="col-10 text">
-          <h3 alt="align-middle">Adicionar pontos ilimitado</h3>
+          <h3 alt="align-middle">Adicionar pontos ilimitados</h3>
           <p alt="align-middle">Faça um verdadeiro mapa de segurança, acompanhando todos os pontos do seu interesse.</p>
       </div>
       <div class="col-2 icon">
@@ -48,16 +48,40 @@
     <div class="row container-form">
       <div class="col-7 field form-group">
           <label for="inputVoucher">Insira o código do seu voucher</label>
-          <input type="text" class="form-control" id="inputVoucher" placeholder="Ex: XPTO12345">
+          <input type="text" class="form-control" [(ngModel)]="voucher" id="inputVoucher" placeholder="Ex: XPTO12345">
       </div>
       <div class="col-5 col-btn">
-        <button><i class="fa fa-check" aria-hidden="true"></i> Torne-se um afiliado</button>
+        <button (click)="sendVoucher(voucher)"><i class="fa fa-check" aria-hidden="true"></i> Torne-se um afiliado</button>
       </div>
     </div>
 
     <div class="container-link-to-form">
-      <p>Não tem um voucher? <a href="#">Adquira aqui.</a></p>
+      <p>Não tem um voucher? <a href="mailto:suporte@linhadiretapm.com">Solicite aqui.</a></p>
     </div>
 
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-thankyou" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> -->
+        <div class="modal-body pt-5 pb-5 text-center">
+          <img class="pt-4 pb-5" src="assets/images/shield_check_feito.png" alt="">
+          <h1>Feito!</h1>
+          <h5 class="pt-4 pb-5">Obrigado por se tornar um afiliado, você agora pode adicionar e monitorar vários pontos, e será notificado de ocorrências em seus pontos ou proximidades.</h5>
+          <button class="btn btn-rounded background-active">Ir para o dashboard</button>
+        </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+      </div>
+    </div>
+  </div>
