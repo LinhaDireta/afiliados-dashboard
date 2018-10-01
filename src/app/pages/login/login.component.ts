@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
     if ( this.formGroupLogin.valid ) {
       this.authService.login(this.formGroupLogin.value).subscribe(
         (data) => {
-          console.log('data:', data);
           this.router.navigate(['places']);
         },
         (errorResponse: HttpErrorResponse) => {

@@ -25,4 +25,8 @@ export class UserService {
     return this.http.get('./assets/vouchers.json');
   }
 
+  update(obj, userId) {
+    return this.http.put<any>(environment.api_url + `/user/${userId}`, obj);
+  }
+
 }

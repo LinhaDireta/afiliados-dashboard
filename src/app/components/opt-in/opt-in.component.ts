@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { User } from '../../interfaces/user';
 
 declare var alertify: any;
 declare var $: any;
@@ -16,6 +17,7 @@ export class OptInComponent implements OnInit {
   voucher: any = '';
   vouchers: any = [];
   showOverlay = false;
+  user: User;
 
   constructor(
     private _router: Router,
@@ -23,14 +25,13 @@ export class OptInComponent implements OnInit {
     private _userService: UserService
   ) {
 
-    const user = _auth.getUser();
+    this.user = _auth.getUser();
 
-    if (!user) {
+    if (!this.user) {
       _router.navigate(['login']);
     }
 
     this._userService.getVouchers().subscribe( res => {
-      console.log(res);
       this.vouchers = res;
     });
    }
@@ -39,21 +40,17 @@ export class OptInComponent implements OnInit {
   }
 
   sendVoucher(voucher_code) {
-    console.log(voucher_code);
     if (voucher_code.length === 0) {
       alertify.error('Informe o voucher.');
     } else {
-      console.log(this.vouchers);
+
       const voucher = this.vouchers.find( el => {
-        console.log(el.voucher);
         return el.voucher === voucher_code;
       });
 
       if (voucher) {
-        console.log(voucher);
         if(this.validateVoucher(voucher)) {
-          // chamar api
-          $('#modal-thankyou').modal('show');
+          this.updateUser();
         } else {
           const expires = new Date(voucher.expires);
           alertify.error(`Esse voucher expirou em ${expires.toLocaleDateString()}`);
@@ -62,6 +59,7 @@ export class OptInComponent implements OnInit {
       } else {
         alertify.error('Voucher inválido');
       }
+      
     }
   }
 
@@ -70,6 +68,20 @@ export class OptInComponent implements OnInit {
     const expires = new Date(voucher.expires);
 
     return (expires > d);
+  }
+
+  updateUser() {
+
+    const plan_id = 2;
+    this._userService.update({ 'plan_id': plan_id}, this.user.id).subscribe( res => {
+      if(res) {
+        this.user.plan_id = plan_id;
+        localStorage.setItem('user', btoa(JSON.stringify(this.user)));
+        $('#modal-thankyou').modal('show');
+      }
+    }, err => {
+      alertify.error('Ocorreu um erro inesperado, por fvor tente mais tarde');
+    });
   }
 
 }
