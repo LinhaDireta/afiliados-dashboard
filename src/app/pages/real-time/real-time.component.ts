@@ -37,8 +37,13 @@ export class RealTimeComponent implements OnInit {
   getAlerts() {
 
     let place_ids = '';
+
+    // Select only places with field 'affliliate_monitoring' == true
     this.places.forEach(element => {
-      place_ids += ',' + element.id;
+      if (element.affiliate_monitoring) {
+        place_ids += ',' + element.id;
+      }
+      
     });
 
     // Remove the fist comma

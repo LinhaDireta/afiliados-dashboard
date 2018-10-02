@@ -16,7 +16,8 @@
   <div class="col-3 box-check">
     <div class="row-one verticaly-center">
       <p>Ativar<br>Monitoramento</p>
-      <app-btn-checkbox-switch [isChecked]="enableMonitoring" (actionCheck)="onCheck($event)"></app-btn-checkbox-switch>
+      <!-- <app-btn-checkbox-switch [isChecked]="enableMonitoring" (actionCheck)="onCheck($event)"></app-btn-checkbox-switch> -->
+      <input type="checkbox" id="check-monitoring" class="form-control" [(ngModel)]="place.affiliate_monitoring" (change)="monitoringChange(place)">
     </div>
     <div class="row-two">
       <p>O que é isso? <span (click)="tooltipe = true">?</span></p>

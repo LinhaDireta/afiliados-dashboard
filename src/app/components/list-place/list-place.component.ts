@@ -1,4 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { PlacesService } from '../../services/places.service';
+import { AuthService } from '../../services/auth.service';
+
+declare var alertify: any;
 
 @Component({
   selector: 'app-list-place',
@@ -7,7 +11,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ListPlaceComponent implements OnInit {
 
-  enableMonitoring: boolean = false;
   @Input() place: any = {};
 
   // output event to open modal edit on parent component
@@ -19,16 +22,19 @@ export class ListPlaceComponent implements OnInit {
 
   tooltipe: boolean = false;
   
-  constructor() { }
+  constructor(
+    private _placesService: PlacesService,
+    private _auth: AuthService
+  ) { }
 
   ngOnInit() {
  
   }
 
-  onCheck(value: boolean) {
-    console.log('OnClick:', value);
-    this.enableMonitoring = value;
-  }
+  // onCheck(value: boolean) {
+  //   console.log('OnClick:', value);
+  //   this.enableMonitoring = value;
+  // }
 
   onEditAction() {
     this.editAction.emit(this.place);
@@ -48,6 +54,21 @@ export class ListPlaceComponent implements OnInit {
     } else {
       return place.address + ', ' + place.street_number + ' - ' + place.neighborhood + ' - ' + place.uf + ' ' + place.postal_code;
     }
+  }
+
+  monitoringChange(place) {
+
+    const payload = {
+      'id' : place.id,
+      'affiliate_monitoring': place.affiliate_monitoring
+    }
+
+    this._placesService.update(payload).subscribe( res => {
+      if (!res['success']) {
+        place.affiliate_monitoring = false;
+        alertify.error('Ocorreu um erro inesperado, por favor tente mais tarde');
+      }
+    });
   }
 
 }
