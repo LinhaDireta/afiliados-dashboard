@@ -30,6 +30,7 @@ import { RealTimeComponent } from './pages/real-time/real-time.component';
 import { OptInComponent } from './components/opt-in/opt-in.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AlertCardComponent } from './components/alert-card/alert-card.component';
+import {NgxToggleModule} from "ngx-toggle";
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { AlertCardComponent } from './components/alert-card/alert-card.component
     ReactiveFormsModule,
     HttpClientModule,
     NgxMaskModule.forRoot(),
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    NgxToggleModule
   ],
   providers: [
     AuthService,

@@ -11,6 +11,16 @@ declare var alertify: any;
 })
 export class ListPlaceComponent implements OnInit {
 
+  ngx_toggle_model = {
+    "onColor": "info",
+    "offColor": "secondary",
+    "onText": "On",
+    "offText": "Off",
+    "disabled": false,
+    "size": "",
+    "value": null
+  };
+
   @Input() place: any = {};
 
   // output event to open modal edit on parent component
@@ -21,14 +31,16 @@ export class ListPlaceComponent implements OnInit {
   @Output() viewAction = new EventEmitter<boolean>();
 
   tooltipe: boolean = false;
-  
+
   constructor(
     private _placesService: PlacesService,
     private _auth: AuthService
-  ) { }
+  ) {
+
+   }
 
   ngOnInit() {
- 
+
   }
 
   // onCheck(value: boolean) {
@@ -69,6 +81,10 @@ export class ListPlaceComponent implements OnInit {
         alertify.error('Ocorreu um erro inesperado, por favor tente mais tarde');
       }
     });
+  }
+
+  onCheck(place) {
+    console.log(place);
   }
 
 }

@@ -16,8 +16,17 @@
   <div class="col-3 box-check">
     <div class="row-one verticaly-center">
       <p>Ativar<br>Monitoramento</p>
-      <!-- <app-btn-checkbox-switch [isChecked]="enableMonitoring" (actionCheck)="onCheck($event)"></app-btn-checkbox-switch> -->
-      <input type="checkbox" id="check-monitoring" class="form-control" [(ngModel)]="place.affiliate_monitoring" (change)="monitoringChange(place)">
+        <ngx-toggle
+          onColor="{{ngx_toggle_model.onColor}}"
+          onText="{{ngx_toggle_model.onText}}"
+          offColor="{{ngx_toggle_model.offColor}}"
+          offText="{{ngx_toggle_model.offText}}"
+          [disabled]="ngx_toggle_model.disabled"
+          [size]="ngx_toggle_model.size"
+          [(value)]="place.affiliate_monitoring"
+          (click)="monitoringChange(place)"
+      >
+      </ngx-toggle>
     </div>
     <div class="row-two">
       <p>O que é isso? <span (click)="tooltipe = true">?</span></p>
